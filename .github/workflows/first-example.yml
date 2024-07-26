@@ -13,6 +13,7 @@ jobs:
           run: ls
 
         - name: Read file
+          shell: bash
           run: cat README.md 2>/dev/null
 
 
