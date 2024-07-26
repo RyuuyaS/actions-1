@@ -14,7 +14,7 @@ jobs:
 
         - name: Read file
           shell: bash
-          run: cat README.md 1> /dev/null 2> /dev/null
+          run: cat README.md > /dev/null 2>& 1
 
 
             
