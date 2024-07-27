@@ -12,19 +12,5 @@ jobs:
         - name: Check out
           uses: actions/checkout@v4.1.7
          
-        - name: Install sowsay program
-          run: |
-            sudo apt-get install cowsay -y
-
-        - name: Generate ASCII Artwork
-          run: cowsay -f dragon "Run for cover, I am a DRAGON" >> dragon.txt
-
-        - name: Generate ASCII Artwork
-          run: grep -i "dragon" dragon.txt
-
-        - name: Read file
-          shell: bash
-          run: cat dragon.txt
-
-        - name: List repo files
-          run: ls -la 
+        - name: Execute shell script
+          run: ./ascii-script.sh
