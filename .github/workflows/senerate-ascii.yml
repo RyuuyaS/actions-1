@@ -32,14 +32,16 @@ jobs:
         - name: Test File Exist
           run: grep -i "dragon" dragon.txt
 
-        - name: Create Test File
-          run: echo Test File Bro >> test.txt
+        # Override
+        # - name: Create Test File
+        #   run: echo Test File Bro >> test.txt
 
-        - name: Override dragon text file
-          uses: actions/upload-artifact@v4
-          with:
-            name: dragon-text-file
-            path: ./test.txt
+        # - name: Override dragon text file
+        #   uses: actions/upload-artifact@v4
+        #   with:
+        #     name: dragon-text-file
+        #     path: ./test.txt
+        #     #overwrite: true
 
 
     deploy-job-3:
