@@ -3,16 +3,59 @@ name: Generate ASCII Artwork
 on: push
 
 jobs:
-    ascii-job:
+    build-job-1:
         runs-on: ubuntu-latest
         steps:
-        - name: Welcome message
-          run: echo "My First Github Action Job"
-
-        - name: Check out
-          uses: actions/checkout@v4.1.7
+        - name: Install cowsay
+          uses: sudo apt-get install cowsay -y
          
-        - name: Execute shell script
+        - name: Execute cowsay
+          run: cowsay -f dragon "Run for cover, I am a DRAGON" >> dragon.txt
+
+        - name: Upload dragon text file
+          uses: actions/upload-artifact@main
+          with:
+            name: dragon-text-file
+            path: ./dragon.txt
+
+
+    test-job-2:
+        needs: build-job-1
+        runs-on: ubuntu-latest
+        steps:
+
+        - name: Download dragon text file
+          uses: actions/download-artifact@main
+          with:
+                name: dragon-text-file
+
+        - name: Test File Exist
+          run: grep -i "dragon" dragon.txt
+
+        - name: Create Test File
+          run: echo Test File Bro >> test.txt
+
+        - name: Override dragon text file
+          uses: actions/upload-artifact@main
+          with:
+            name: dragon-text-file
+            path: ./test.txt
+
+
+    deploy-job-3:
+        # needs: [test-job-2, build-job-1]
+        needs: test-job-2
+        runs-on: ubuntu-latest
+        steps:
+        - name: Download dragon text file
+          uses: actions/download-artifact@main
+          with:
+                name: dragon-text-file
+
+        - name: Read File
           run: |
-            chmod +x ./ascii-script.sh
-            ./ascii-script.sh
+            ls -la
+            cat dragon.txt
+
+        - name: Deploy
+          run: echo No Money so Deploy ...
