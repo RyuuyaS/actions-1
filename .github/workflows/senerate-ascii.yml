@@ -13,7 +13,7 @@ jobs:
           run: cowsay -f dragon "Run for cover, I am a DRAGON" >> dragon.txt
 
         - name: Upload dragon text file
-          uses: actions/upload-artifact@main
+          uses: actions/upload-artifact@v4
           with:
             name: dragon-text-file
             path: ./dragon.txt
@@ -25,7 +25,7 @@ jobs:
         steps:
 
         - name: Download dragon text file
-          uses: actions/download-artifact@main
+          uses: actions/download-artifact@v4
           with:
                 name: dragon-text-file
 
@@ -36,7 +36,7 @@ jobs:
           run: echo Test File Bro >> test.txt
 
         - name: Override dragon text file
-          uses: actions/upload-artifact@main
+          uses: actions/upload-artifact@v4
           with:
             name: dragon-text-file
             path: ./test.txt
@@ -48,7 +48,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - name: Download dragon text file
-          uses: actions/download-artifact@main
+          uses: actions/download-artifact@v4
           with:
                 name: dragon-text-file
 
